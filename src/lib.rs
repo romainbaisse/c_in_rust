@@ -1,6 +1,9 @@
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
+extern {
+    fn say_hello();
+}
 
 #[cfg(test)]
 mod tests {
@@ -11,8 +14,16 @@ mod tests {
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
+
+    #[test]
+    fn hello_test() {
+        hello();
+    }
 }
 
 pub fn hello() {
-    println!("Hello, world!");
+    println!("Hello from rust code");
+    unsafe {
+        say_hello();
+    }
 }
